@@ -3,7 +3,7 @@
 require "bundler"
 require "yaml"
 
-config = YAML.load_file("gems.yml")
+config = YAML.load_file("../support/gems.yml")
 
 existing_gems = config["gems"].keys
   .map do |gem|
