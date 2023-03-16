@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require "bundler"
+require "yaml"
+
+config = YAML.load_file("gems.yml")
+
+existing_gems = config["gems"].keys
+  .map do |gem|
+    command = "bundle show #{gem}"
+    current_path = File.dirname(__dir__)
+    path = `cd #{current_path} && #{command} 2> /dev/null`.chomp
+
+    unless path.empty?
+      "#{gem}:#{path}"
+    end
+  end
+  .reject(&:nil?)
+
+# Outputs a CSV "hash-like" string in this format
+#
+# GEM_NAME:GEM_PATH,SECOND_GEM_NAME:SECOND_GEM_PATH
+# avo:/Users/adrian/work/avocado/avo-3,avo_filters:/Users/adrian/work/avocado/advanced/avo_filters
+puts existing_gems.join(",")

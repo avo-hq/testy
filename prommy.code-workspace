@@ -1,0 +1,42 @@
+{
+	"folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../avo"
+    },
+    {
+      "path": "../avo_authorization"
+    },
+    {
+      "path": "../avo_dashboards"
+    },
+    {
+      "path": "../avo_filters"
+    },
+    {
+      "path": "../avo_menu"
+    },
+    {
+      "path": "../avo_nested_resources"
+    },
+    {
+      "path": "../avo_pro"
+    },
+    {
+      "path": "../support"
+    }
+  ],
+  "settings": {
+    "workbench.colorCustomizations": {
+      "commandCenter.border": "#15202b99",
+      "sash.hoverBorder": "#fbed80",
+      "titleBar.activeBackground": "#f9e64f",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#f9e64f99",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#f9e64f"
+  }
+}

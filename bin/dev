@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+export AVO_ENGINES=$(bin/gems)
+
+echo Found the follsowing Avo engines: ${AVO_ENGINES}
+
+if ! gem list foreman -i --silent; then
+  echo "Installing foreman..."
+  gem install foreman
+fi
+
+exec overmind start -f Procfile "$@"

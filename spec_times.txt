@@ -1,0 +1,6 @@
+example_id                                 | status | run_time        |
+------------------------------------------ | ------ | --------------- |
+./avo/spec/features/avo/app_spec.rb[1:1:1] | passed | 0.32327 seconds |
+./avo/spec/features/avo/app_spec.rb[1:2:1] | failed | 0.28792 seconds |
+./spec/features/avo/app_spec.rb[1:1:1]     | passed | 0.32315 seconds |
+./spec/features/avo/app_spec.rb[1:2:1]     | failed | 0.07408 seconds |
