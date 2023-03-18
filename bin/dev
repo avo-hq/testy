@@ -9,4 +9,17 @@ if ! gem list foreman -i --silent; then
   gem install foreman
 fi
 
+export WEB_START_COMMAND='bin/rails server -p 3030'
+
+for arg in "$@"; do
+  if [ "$arg" = "debugger" ]; then
+    echo "=== Starting in debugger mode ==="
+    echo "Make sure you have the VSCode rdbg Ruby Debugger extension installed and configured."
+    echo "Inside VSCode, open the debug panel and run 'Listen for rdebug-ide'."
+    echo "=== Waiting listener to attach ==="
+    export WEB_START_COMMAND='rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- bin/rails server -p 3030'
+    break
+  fi
+done
+
 exec overmind start -f Procfile "$@"
