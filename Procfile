@@ -1,4 +1,4 @@
-web: bin/rails server -p 3030
+web: eval '$WEB_START_COMMAND'
 prommy-js: yarn build:js --watch
 prommy-css: yarn build:css --watch
 avo-js: cd ./../avo && yarn build:js --watch
