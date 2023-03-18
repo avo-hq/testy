@@ -9,7 +9,7 @@ if ! gem list foreman -i --silent; then
   gem install foreman
 fi
 
-debugger=false
+export WEB_START_COMMAND='bin/rails server -p 3030'
 
 for arg in "$@"; do
   if [ "$arg" = "debugger" ]; then
@@ -18,13 +18,8 @@ for arg in "$@"; do
     echo "Inside VSCode, open the debug panel and run 'Listen for rdebug-ide'."
     echo "=== Waiting listener to attach ==="
     export WEB_START_COMMAND='rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- bin/rails server -p 3030'
-    debugger=true
     break
   fi
 done
-
-if ! $debugger; then
-  export WEB_START_COMMAND='bin/rails server -p 3030'
-fi
 
 exec overmind start -f Procfile "$@"
