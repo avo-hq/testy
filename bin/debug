@@ -9,4 +9,4 @@ if ! command -v overmind &> /dev/null; then
   brew install overmind
 fi
 
-exec overmind start -f Procfile "$@"
+exec overmind start -f Procfile.debug "$@"

@@ -1,4 +1,4 @@
-web: bin/rails server -p 3030
+web: eval "rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- bin/rails server -p 3030"
 prommy-js: yarn build:js --watch
 prommy-css: yarn build:css --watch
 avo-js: cd ./../avo && yarn build:js --watch

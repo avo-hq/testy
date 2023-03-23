@@ -22,7 +22,7 @@ PATH
 PATH
   remote: ../avo_filters
   specs:
-    avo_filters (0.5.0)
+    avo_filters (0.5.1)
       rails (>= 6.0)
       ransack
       view_component
@@ -370,7 +370,7 @@ GEM
       ffi (~> 1.0)
     redis (4.8.1)
     regexp_parser (2.7.0)
-    reline (0.3.2)
+    reline (0.3.1)
       io-console (~> 0.5)
     responders (3.1.0)
       actionpack (>= 5.2)
@@ -512,6 +512,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
