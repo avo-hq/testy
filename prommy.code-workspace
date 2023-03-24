@@ -26,6 +26,9 @@
     },
     {
       "path": "../support"
+    },
+    {
+      "path": "../avo_advanced"
     }
   ],
   "settings": {
