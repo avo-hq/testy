@@ -87,6 +87,10 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
+  def get_users?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all
