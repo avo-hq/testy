@@ -7,7 +7,6 @@ gemspec path: './../avo'
 gem "pluggy", path: "./../avo/pluggy"
 gemspec path: './../avo_advanced'
 gemspec path: './../avo_pro'
-gemspec path: './../avo_authorization'
 gemspec path: './../avo_dashboards'
 gemspec path: './../avo_filters'
 gemspec path: './../avo_menu'

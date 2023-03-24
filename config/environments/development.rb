@@ -86,7 +86,8 @@ Rails.application.configure do
     "AvoMenu",
     "AvoFilters",
     "AvoDashboards",
-    "AvoAuthorization",
+    "AvoPro",
+    "AvoAdvanced",
     "AvoNestedResources",
     "AvoScopes"
   ]
