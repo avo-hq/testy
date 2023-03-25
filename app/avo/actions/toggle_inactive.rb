@@ -7,6 +7,7 @@ class Avo::Actions::ToggleInactive < Avo::BaseAction
     as: :tags,
     mode: :select,
     close_on_select: true,
+    visible: -> (resource:) { model.present? },
     fetch_values_from: -> { "/admin/resources/users/get_users?hey=you&record_id=#{resource.record.id}" },
     suggestions: -> do
       User.take(5).map do |user|
