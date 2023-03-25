@@ -1,10 +1,13 @@
 {
 	"folders": [
     {
-      "path": "."
+      "path": "../avo"
     },
     {
-      "path": "../avo"
+      "path": "../avo_pro"
+    },
+    {
+      "path": "../avo_advanced"
     },
     {
       "path": "../avo_dashboards"
@@ -19,13 +22,10 @@
       "path": "../avo_nested_resources"
     },
     {
-      "path": "../avo_pro"
+      "path": "."
     },
     {
       "path": "../support"
-    },
-    {
-      "path": "../avo_advanced"
     }
   ],
   "settings": {

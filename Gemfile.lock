@@ -47,6 +47,7 @@ PATH
   remote: ../avo_pro
   specs:
     avo_pro (0.1.42)
+      avo
       rails (>= 6.0.0)
       zeitwerk
 
@@ -54,9 +55,9 @@ PATH
   remote: ../avo
   specs:
     avo (2.19.0)
-      actionview (>= 6.0)
+      actionview (>= 6.1)
       active_link_to
-      activerecord (>= 6.0)
+      activerecord (>= 6.1)
       addressable
       docile
       dry-initializer
