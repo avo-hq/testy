@@ -10,12 +10,16 @@ class Avo::Resources::User < Avo::BaseResource
   self.resolve_index_query = -> do
     model_class.order(last_name: :asc)
   end
-  self.find_record_method = ->(model_class:, id:, params:) do
-    # Friendly_id's fidn method doesn't work with arrays ['you-slug'].
-    # So we need to pick that value up from the array.
-    id = id.first if id.is_a?(Array) && id.count == 1
+  self.find_record_method = -> {
+    # When using friendly_id, we need to check if the id is a slug or an id.
+    # If it's a slug, we need to use the find_by_slug method.
+    # If it's an id, we need to use the find method.
+    # If the id is an array, we need to use the where method in order to return a collection.
+    if id.is_a?(Array)
+      return id.first.to_i == 0 ? model_class.where(slug: id) : model_class.where(id: id)
+    end
 
-    model_class.friendly.find(id)
+    (id.to_i == 0) ? model_class.find_by_slug(id) : model_class.find(id)
   end
   self.includes = [:posts, :post]
   self.devise_password_optional = true
