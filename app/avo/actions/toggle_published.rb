@@ -8,13 +8,13 @@ class Avo::Actions::TogglePublished < Avo::BaseAction
   field :message, as: :text, default: "Your account has been marked as inactive."
 
   def handle(**args)
-    models, _ = args.values_at(:models, :fields, :current_user, :resource)
+    records, _ = args.values_at(:records, :fields, :current_user, :resource)
 
-    models.each do |model|
-      if model.published_at.present?
-        model.update published_at: nil
+    records.each do |record|
+      if record.published_at.present?
+        record.update published_at: nil
       else
-        model.update published_at: DateTime.now
+        record.update published_at: DateTime.now
       end
     end
 

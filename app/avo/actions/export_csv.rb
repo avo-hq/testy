@@ -4,16 +4,16 @@ class Avo::Actions::ExportCsv < Avo::BaseAction
   self.may_download_file = true
 
   def handle(**args)
-    models, resource = args.values_at(:models, :resource)
+    records, resource = args.values_at(:records, :resource)
 
-    return error "No record selected" if models.blank?
+    return error "No record selected" if records.blank?
 
-    attributes = get_attributes models.first
+    attributes = get_attributes records.first
 
     file = CSV.generate(headers: true) do |csv|
       csv << attributes
 
-      models.each do |record|
+      records.each do |record|
         csv << attributes.map do |attr|
           record.send(attr)
         end
