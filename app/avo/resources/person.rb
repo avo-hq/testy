@@ -8,6 +8,7 @@ class Avo::Resources::Person < Avo::BaseResource
   #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
   # end
 
+  def fields
   field :name, as: :text, link_to_resource: true, sortable: true, stacked: true
   field :type, as: ::Pluggy::Fields::RadioField, name: "Type", options: {Spouse: "Spouse", Sibling: "Sibling"}, include_blank: true, filterable: true
   field :link, as: :text, as_html: true
@@ -22,4 +23,5 @@ class Avo::Resources::Person < Avo::BaseResource
     hide_search_input: true,
     link_to_child_resource: false,
     description: "Default behaviour with link_to_child_resource disabled"
+  end
 end

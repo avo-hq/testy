@@ -4,10 +4,12 @@ class Avo::Actions::ReleaseFish < Avo::BaseAction
     "Are you sure you want to release the #{record.name}?"
   }
 
-  field :message, as: :trix, help: "Tell the fish something before releasing."
-  field :user, as: :belongs_to, searchable: true, visible: -> {
-    resource.params[:id].present?
-  }
+  def fields
+    field :message, as: :trix, help: "Tell the fish something before releasing."
+    field :user, as: :belongs_to, searchable: true, visible: -> {
+      resource.params[:id].present?
+    }
+  end
 
   def handle(models:, fields:, **)
     models.each do |model|

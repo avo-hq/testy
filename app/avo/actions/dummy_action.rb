@@ -9,8 +9,10 @@ class Avo::Actions::DummyAction < Avo::BaseAction
     end
   end
 
-  field :keep_modal_open, as: :boolean
-  field :persistent_text, as: :text
+  def fields
+    field :keep_modal_open, as: :boolean
+    field :persistent_text, as: :text
+  end
 
   def handle(**args)
     # Test keep modal open

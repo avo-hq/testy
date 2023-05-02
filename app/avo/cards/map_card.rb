@@ -3,6 +3,6 @@ class Avo::Cards::MapCard < AvoDashboards::PartialCard
   self.label = "Map card"
   self.partial = "avo/cards/map_card"
   self.display_header = false
-  self.cols = 2
+  self.cols = 3
   self.rows = 4
 end
