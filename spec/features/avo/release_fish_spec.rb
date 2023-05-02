@@ -13,7 +13,7 @@ RSpec.feature Avo::Actions::ReleaseFish, type: :feature do
       }.with_indifferent_access,
       current_user: current_user,
       resource: resource,
-      models: [fish]
+      records: [fish]
     }
 
     action = described_class.new(record: fish, resource: resource, user: current_user, view: :edit)

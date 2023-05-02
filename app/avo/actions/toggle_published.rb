@@ -10,9 +10,9 @@ class Avo::Actions::TogglePublished < Avo::BaseAction
   end
 
   def handle(**args)
-    models, _ = args.values_at(:models, :fields, :current_user, :resource)
+    records, _ = args.values_at(:records, :fields, :current_user, :resource)
 
-    models.each do |model|
+    records.each do |model|
       if model.published_at.present?
         model.update published_at: nil
       else

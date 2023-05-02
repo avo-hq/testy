@@ -20,7 +20,7 @@ class Avo::Resources::User < Avo::BaseResource
     end
 
     (id.to_i == 0) ? model_class.find_by_slug(id) : model_class.find(id)
-  end
+  }
   self.includes = [:posts, :post]
   self.devise_password_optional = true
 

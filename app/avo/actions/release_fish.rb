@@ -11,8 +11,8 @@ class Avo::Actions::ReleaseFish < Avo::BaseAction
     }
   end
 
-  def handle(models:, fields:, **)
-    models.each do |model|
+  def handle(records:, fields:, **)
+    records.each do |model|
       model.release
     end
 
@@ -24,6 +24,6 @@ class Avo::Actions::ReleaseFish < Avo::BaseAction
 
     message = ActionView::Base.full_sanitizer.sanitize fields[:message]
 
-    succeed "#{models.count} fish released with message '#{message}' by #{user&.name}."
+    succeed "#{records.count} fish released with message '#{message}' by #{user&.name}."
   end
 end

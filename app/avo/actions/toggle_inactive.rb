@@ -21,9 +21,9 @@ class Avo::Actions::ToggleInactive < Avo::BaseAction
   end
 
   def handle(**args)
-    models, fields, _ = args.values_at(:models, :fields, :current_user, :resource)
+    records, fields, _ = args.values_at(:records, :fields, :current_user, :resource)
 
-    models.each do |model|
+    records.each do |model|
       if model.active
         model.update active: false
       else

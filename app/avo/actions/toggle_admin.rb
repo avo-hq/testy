@@ -9,9 +9,9 @@ class Avo::Actions::ToggleAdmin < Avo::BaseAction
   }
 
   def handle(**args)
-    models, fields, current_user, resource = args.values_at(:models, :fields, :current_user, :resource)
+    records, fields, current_user, resource = args.values_at(:records, :fields, :current_user, :resource)
 
-    models.each do |model|
+    records.each do |model|
       if model.roles["admin"].present?
         model.update roles: model.roles.merge!({"admin": false})
       else
