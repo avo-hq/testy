@@ -5,6 +5,7 @@ class Avo::Resources::BadResource < Avo::BaseResource
   #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
   # end
 
-  field :id, as: :id
-  # add fields here
+  def fields
+    field :id, as: :id
+  end
 end

@@ -14,41 +14,43 @@ class Avo::Resources::ZPost < Avo::BaseResource
   #   link_to "google", "goolee"
   # end
 
-  field :id, as: :id
-  field :name, as: :text, required: true, sortable: true, filterable: true
-  field :body,
-    as: :trix,
-    placeholder: "Enter text",
-    always_show: false,
-    attachment_key: :attachments,
-    hide_attachment_url: true,
-    hide_attachment_filename: true,
-    hide_attachment_filesize: true
-  field :tags,
-    as: :tags,
-    # readonly: true,
-    acts_as_taggable_on: :tags,
-    close_on_select: false,
-    placeholder: "add some tags",
-    suggestions: -> { Post.tags_suggestions },
-    enforce_suggestions: true,
-    help: "The only allowed values here are `one`, `two`, and `three`"
-  field :cover_photo, as: :file, is_image: true, as_avatar: :rounded, full_width: true, hide_on: [], accept: "image/*"
-  field :cover_photo, as: :external_image, name: "Cover photo", required: true, hide_on: :all, link_to_resource: true, as_avatar: :rounded, format_using: ->(value) { value.present? ? value&.url : nil }
-  field :audio, as: :file, is_audio: true, accept: "audio/*"
-  field :excerpt, as: :text, hide_on: :all, as_description: true do |model|
-    ActionView::Base.full_sanitizer.sanitize(model.body).truncate 130
-  rescue
-    ""
-  end
+  def fields
+    field :id, as: :id
+    field :name, as: :text, required: true, sortable: true, filterable: true
+    field :body,
+      as: :trix,
+      placeholder: "Enter text",
+      always_show: false,
+      attachment_key: :attachments,
+      hide_attachment_url: true,
+      hide_attachment_filename: true,
+      hide_attachment_filesize: true
+    field :tags,
+      as: :tags,
+      # readonly: true,
+      acts_as_taggable_on: :tags,
+      close_on_select: false,
+      placeholder: "add some tags",
+      suggestions: -> { Post.tags_suggestions },
+      enforce_suggestions: true,
+      help: "The only allowed values here are `one`, `two`, and `three`"
+    field :cover_photo, as: :file, is_image: true, as_avatar: :rounded, full_width: true, hide_on: [], accept: "image/*"
+    field :cover_photo, as: :external_image, name: "Cover photo", required: true, hide_on: :all, link_to_resource: true, as_avatar: :rounded, format_using: ->(value) { value.present? ? value&.url : nil }
+    field :audio, as: :file, is_audio: true, accept: "audio/*"
+    field :excerpt, as: :text, hide_on: :all, as_description: true do |model|
+      ActionView::Base.full_sanitizer.sanitize(model.body).truncate 130
+    rescue
+      ""
+    end
 
-  field :is_featured, as: :boolean, visible: -> { Avo::Current.context[:user].is_admin? }
-  field :is_published, as: :boolean do |model|
-    model.published_at.present?
+    field :is_featured, as: :boolean, visible: -> { Avo::Current.context[:user].is_admin? }
+    field :is_published, as: :boolean do |model|
+      model.published_at.present?
+    end
+    field :user, as: :belongs_to, placeholder: "—"
+    field :status, as: :select, enum: ::Post.statuses, display_value: false
+    field :comments, as: :has_many, use_resource: Avo::Resources::PhotoComment
   end
-  field :user, as: :belongs_to, placeholder: "—"
-  field :status, as: :select, enum: ::Post.statuses, display_value: false
-  field :comments, as: :has_many, use_resource: Avo::Resources::PhotoComment
 
   grid do
     cover :cover_photo, as: :file, is_image: true, link_to_resource: true

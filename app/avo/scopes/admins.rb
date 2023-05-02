@@ -1,4 +1,4 @@
-class Avo::Scopes::Admins < Avo::BaseScope
+class Avo::Scopes::Admins < AvoPro::Scopes::BaseScope
   self.name = "Admins"
   self.description = "Admins only"
   self.scope = :admins
