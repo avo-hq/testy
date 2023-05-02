@@ -27,16 +27,16 @@ class ProjectPolicy < ApplicationPolicy
     true
   end
 
-  def upload_attachments?
-    true
+  [:upload, :download, :delete].each do |action|
+    define_method "#{action}_files?" do
+      true
+    end
   end
 
-  def download_attachments?
-    true
-  end
-
-  def delete_attachments?
-    true
+  [:upload, :download, :delete].each do |action|
+    define_method "#{action}_files?" do
+      true
+    end
   end
 
   def attach_comments?
