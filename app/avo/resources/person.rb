@@ -5,7 +5,7 @@ class Avo::Resources::Person < Avo::BaseResource
 
   self.link_to_child_resource = true
   # self.search_query = -> do
-  #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
+  #   query.ransack(id_eq: params[:q], m: "or").result(distinct: false)
   # end
 
   def fields

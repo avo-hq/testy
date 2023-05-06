@@ -2,7 +2,7 @@ class Avo::Resources::Course < Avo::BaseResource
   self.title = :name
   self.includes = []
   self.search_query = -> do
-    scope.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
+    query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
   end
   self.keep_filters_panel_open = true
   self.stimulus_controllers = "course-resource toggle-fields"

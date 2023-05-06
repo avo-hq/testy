@@ -7,9 +7,9 @@ class Avo::Resources::PhotoComment < Avo::BaseResource
   self.authorization_policy = PhotoCommentPolicy
   self.search_query = -> do
     if params[:via_association] == "has_many"
-      scope.ransack(id_eq: params[:q], m: "or").result(distinct: false).joins(:photo_attachment)
+      query.ransack(id_eq: params[:q], m: "or").result(distinct: false).joins(:photo_attachment)
     else
-      scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
+      query.ransack(id_eq: params[:q], m: "or").result(distinct: false)
     end
   end
 

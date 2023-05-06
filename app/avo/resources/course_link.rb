@@ -3,7 +3,7 @@ class Avo::Resources::CourseLink < Avo::BaseResource
   self.includes = [:course]
   self.model_class = Course::Link
   self.search_query = -> do
-    scope.ransack(id_eq: params[:q], link_cont: params[:q], m: "or").result(distinct: false)
+    query.ransack(id_eq: params[:q], link_cont: params[:q], m: "or").result(distinct: false)
   end
 
   self.ordering = {
