@@ -27,10 +27,9 @@ class Avo::Resources::Project < Avo::BaseResource
       filterable: true
     field :country,
       as: :country,
-      index_text_align: :left,
       include_blank: "No country",
       filterable: true
-    field :users_required, as: :number, min: 10, max: 1000000, step: 1, index_text_align: :right
+    field :users_required, as: :number, min: 10, max: 1000000, step: 1, html: {index: {wrapper: {classes: "text-right"}}}
     field :started_at, as: :date_time, name: "Started", time_24hr: true, nullable: true,
       relative: true,
       timezone: "EET",
