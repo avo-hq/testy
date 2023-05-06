@@ -19,9 +19,9 @@ class Avo::Resources::Team < Avo::BaseResource
         end
       end
     end
-    field :logo, as: :external_image, hide_on: :show, as_avatar: :rounded do |model|
-      if model.url
-        "//logo.clearbit.com/#{URI.parse(model.url).host}?size=180"
+    field :logo, as: :external_image, hide_on: :show, as_avatar: :rounded do
+      if record.url
+        "//logo.clearbit.com/#{URI.parse(record.url).host}?size=180"
       end
     end
     field :created_at, as: :date_time, filterable: true
@@ -33,15 +33,15 @@ class Avo::Resources::Team < Avo::BaseResource
       rows: 5,
       readonly: false,
       hide_on: :index,
-      format_using: ->(value) { value.to_s.truncate 30 },
+      format_using: -> { value.to_s.truncate 30 },
       default: "This is a wonderful team!",
       filterable: true,
       nullable: true,
       null_values: ["0", "", "null", "nil"],
       show_on: :preview
 
-    field :members_count, as: :number do |model|
-      model.team_members.length
+    field :members_count, as: :number do
+      record.team_members.length
     end
 
     field :memberships,
@@ -59,18 +59,18 @@ class Avo::Resources::Team < Avo::BaseResource
     sidebar do
       field :url, as: :text
       field :created_at, as: :date_time, hide_on: :forms
-      field :logo, as: :external_image, as_avatar: :rounded do |model|
-        if model.url
-          "//logo.clearbit.com/#{URI.parse(model.url).host}?size=180"
+      field :logo, as: :external_image, as_avatar: :rounded do
+        if record.url
+          "//logo.clearbit.com/#{URI.parse(record.url).host}?size=180"
         end
       end
     end
   end
 
   grid do
-    cover :logo, as: :external_image, link_to_resource: true do |model|
-      if model.url.present?
-        "//logo.clearbit.com/#{URI.parse(model.url).host}?size=180"
+    cover :logo, as: :external_image, link_to_resource: true do
+      if record.url.present?
+        "//logo.clearbit.com/#{URI.parse(record.url).host}?size=180"
       end
     end
     title :name, as: :text, link_to_resource: true

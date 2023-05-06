@@ -34,17 +34,17 @@ class Avo::Resources::Post < Avo::BaseResource
       enforce_suggestions: true,
       help: "The only allowed values here are `one`, `two`, and `three`"
     field :cover_photo, as: :file, is_image: true, as_avatar: :rounded, full_width: true, hide_on: [], accept: "image/*"
-    field :cover_photo, as: :external_image, name: "Cover photo", required: true, hide_on: :all, link_to_resource: true, as_avatar: :rounded, format_using: ->(value) { value.present? ? value&.url : nil }
+    field :cover_photo, as: :external_image, name: "Cover photo", required: true, hide_on: :all, link_to_resource: true, as_avatar: :rounded, format_using: -> { value.present? ? value&.url : nil }
     field :audio, as: :file, is_audio: true, accept: "audio/*"
-    field :excerpt, as: :text, hide_on: :all, as_description: true do |model|
-      extract_excerpt model.body
+    field :excerpt, as: :text, hide_on: :all, as_description: true do
+      extract_excerpt record.body
     end
 
     field :is_featured, as: :boolean, visible: -> do
       Avo::Current.context[:user].is_admin?
     end
-    field :is_published, as: :boolean do |model|
-      model.published_at.present?
+    field :is_published, as: :boolean do
+      record.published_at.present?
     end
     field :user, as: :belongs_to, placeholder: "—"
     field :status, as: :select, enum: ::Post.statuses, display_value: false
@@ -54,8 +54,8 @@ class Avo::Resources::Post < Avo::BaseResource
   grid do
     cover :cover_photo, as: :file, is_image: true, link_to_resource: true
     title :name, as: :text, required: true, link_to_resource: true
-    body :excerpt, as: :text do |model|
-      extract_excerpt model.body
+    body :excerpt, as: :text do
+      extract_excerpt record.body
     end
   end
 

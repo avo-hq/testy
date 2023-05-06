@@ -6,7 +6,7 @@ PATH
 PATH
   remote: ../avo_advanced
   specs:
-    avo_advanced (0.1.46)
+    avo_advanced (0.1.48)
       avo
       rails (>= 6.1.0)
       zeitwerk
@@ -14,7 +14,7 @@ PATH
 PATH
   remote: ../avo_dashboards
   specs:
-    avo_dashboards (0.1.1)
+    avo_dashboards (0.1.2)
       avo
       rails (>= 6.1.0)
       turbo-rails
@@ -24,21 +24,18 @@ PATH
 PATH
   remote: ../avo_filters
   specs:
-    avo_filters (0.5.5)
-      avo
-      rails (>= 6.1.0)
+    avo_filters (0.5.0)
+      rails (>= 6.0)
       ransack
       view_component
-      zeitwerk
 
 PATH
   remote: ../avo_menu
   specs:
-    avo_menu (0.1.8)
-      avo
+    avo_menu (0.1.0)
       docile
       dry-initializer
-      rails (>= 6.1.0)
+      rails (>= 6.0.0)
       zeitwerk
 
 PATH
@@ -51,7 +48,7 @@ PATH
 PATH
   remote: ../avo_pro
   specs:
-    avo_pro (0.1.48)
+    avo_pro (0.1.49)
       avo
       rails (>= 6.1.0)
       zeitwerk
@@ -59,7 +56,7 @@ PATH
 PATH
   remote: ../avo
   specs:
-    avo (3.0.0.pre3)
+    avo (3.0.0.pre6)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)

@@ -33,7 +33,7 @@ class Avo::Resources::Product < Avo::BaseResource
       }
     }
     title :title, as: :text
-    body :description, as: :textarea, format_using: ->(value) {
+    body :description, as: :textarea, format_using: -> {
       simple_format value
     }
   end
