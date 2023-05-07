@@ -51,7 +51,6 @@ class Avo::Resources::Fish < Avo::BaseResource
       icon: "heroicons/outline/information-circle", target: :_blank, style: :icon
   end
 
-
   def fields
     field :id, as: :id
     field :id, as: :number, only_on: :forms, disabled: -> { view != :new }
