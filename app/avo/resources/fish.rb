@@ -51,12 +51,74 @@ class Avo::Resources::Fish < Avo::BaseResource
       icon: "heroicons/outline/information-circle", target: :_blank, style: :icon
   end
 
-  field :id, as: :id
-  field :id, as: :number, only_on: :forms, disabled: -> { view != :new }
-  field :name, as: :text, required: -> { view == :new }, help: "help text"
-  field :user, as: :belongs_to
-  field :type, as: :text, hide_on: :forms
-  field :reviews, as: :has_many
+
+  def fields
+    field :id, as: :id
+    field :id, as: :number, only_on: :forms, disabled: -> { view != :new }
+    field :name, as: :text, required: -> { view == :new }, help: "help text"
+    field :user, as: :belongs_to
+    field :type, as: :text, hide_on: :forms
+    field :reviews, as: :has_many
+
+    tool Avo::ResourceTools::NestedFishReviews, only_on: :new
+    tool Avo::ResourceTools::FishInformation, show_on: :forms
+
+    tabs do
+      tab "big useless tab here" do
+        panel do
+          field :id, as: :id
+        end
+      end
+
+      tab "another big useless tab here 2" do
+        panel do
+          field :id, as: :id
+        end
+      end
+
+      tab "big tab here 3" do
+        panel do
+          field :id, as: :id
+        end
+      end
+
+      tab "big tab here 3.5" do
+        panel do
+          field :id, as: :id
+        end
+      end
+
+      tab "tab here 4" do
+        panel do
+          field :id, as: :id
+        end
+      end
+
+      tab "tab" do
+        panel do
+          field :id, as: :id
+        end
+      end
+
+      tab "big useless tab here 6" do
+        panel do
+          field :id, as: :id
+        end
+      end
+
+      tab "big useless tab here 7" do
+        panel do
+          field :id, as: :id
+        end
+      end
+
+      tab "big tab 8" do
+        panel do
+          field :id, as: :id
+        end
+      end
+    end
+  end
 
   grid do
     title :name, as: :text, required: true, link_to_resource: true
@@ -70,63 +132,4 @@ class Avo::Resources::Fish < Avo::BaseResource
     special_message: true
   }
   action Avo::Actions::ReleaseFish
-
-  tool Avo::ResourceTools::NestedFishReviews, only_on: :new
-  tool Avo::ResourceTools::FishInformation, show_on: :forms
-
-  tabs do
-    tab "big useless tab here" do
-      panel do
-        field :id, as: :id
-      end
-    end
-
-    tab "another big useless tab here 2" do
-      panel do
-        field :id, as: :id
-      end
-    end
-
-    tab "big tab here 3" do
-      panel do
-        field :id, as: :id
-      end
-    end
-
-    tab "big tab here 3.5" do
-      panel do
-        field :id, as: :id
-      end
-    end
-
-    tab "tab here 4" do
-      panel do
-        field :id, as: :id
-      end
-    end
-
-    tab "tab" do
-      panel do
-        field :id, as: :id
-      end
-    end
-
-    tab "big useless tab here 6" do
-      panel do
-        field :id, as: :id
-      end
-    end
-
-    tab "big useless tab here 7" do
-      panel do
-        field :id, as: :id
-      end
-    end
-
-    tab "big tab 8" do
-      panel do
-        field :id, as: :id
-      end
-    end
-  end
 end

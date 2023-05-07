@@ -9,31 +9,33 @@ class Avo::Resources::Membership < Avo::BaseResource
   self.model_class = "TeamMembership"
   self.stimulus_controllers = "test"
 
-  field :id, as: :id
-  field :id, as: :number, only_on: :edit
+  def fields
+    field :id, as: :id
+    field :id, as: :number, only_on: :edit
 
-  field :level,
-    as: :select,
-    as_description: true,
-    display_value: true,
-    default: -> { Time.now.hour < 12 ? "advanced" : "beginner" },
-    options: -> do
-      {
-        Beginner: :beginner,
-        Intermediate: :intermediate,
-        Advanced: :advanced,
-        "#{record.id}": "record_id",
-        "#{resource.name}": "resource_name",
-        "#{view}": "view",
-        "#{field.id}": "field"
-      }
-    end
+    field :level,
+      as: :select,
+      as_description: true,
+      display_value: true,
+      default: -> { Time.now.hour < 12 ? "advanced" : "beginner" },
+      options: -> do
+        {
+          Beginner: :beginner,
+          Intermediate: :intermediate,
+          Advanced: :advanced,
+          "#{record.id}": "record_id",
+          "#{resource.name}": "resource_name",
+          "#{view}": "view",
+          "#{field.id}": "field"
+        }
+      end
 
-  field :user, as: :belongs_to, searchable: false, attach_scope: -> {
-    # puts ["parent->", parent, parent.team].inspect
-    query
-  }
-  field :team, as: :belongs_to
+    field :user, as: :belongs_to, searchable: false, attach_scope: -> {
+      # puts ["parent->", parent, parent.team].inspect
+      query
+    }
+    field :team, as: :belongs_to
 
-  # tool TeamMembershipToolPlayground, show_on: :all
+    # tool TeamMembershipToolPlayground, show_on: :all
+  end
 end
