@@ -26,7 +26,7 @@ class Avo::Resources::Post < Avo::BaseResource
       hide_attachment_filesize: true
     field :tags,
       as: :tags,
-      # readonly: true,
+      # disabled: true,
       acts_as_taggable_on: :tags,
       close_on_select: false,
       placeholder: "add some tags",

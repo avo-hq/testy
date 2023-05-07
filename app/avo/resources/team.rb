@@ -31,7 +31,7 @@ class Avo::Resources::Team < Avo::BaseResource
       as_description: true,
       as: :textarea,
       rows: 5,
-      readonly: false,
+      disabled: false,
       hide_on: :index,
       format_using: -> { value.to_s.truncate 30 },
       default: "This is a wonderful team!",
