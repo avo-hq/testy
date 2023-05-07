@@ -18,7 +18,7 @@ class Avo::Dashboards::Dashy < AvoDashboards::BaseDashboard
     card Avo::Cards::ExampleMetric,
       label: "Active users metric",
       description: "Count of the active users.",
-      options: {
+      arguments: {
         active_users: true
       }
     card Avo::Cards::PercentDone
@@ -33,12 +33,6 @@ class Avo::Dashboards::Dashy < AvoDashboards::BaseDashboard
 
     card Avo::Cards::MapCard
     card Avo::Cards::ExampleCustomPartial,
-      options: {
-        foo: "bar",
-        block: ->(params = nil) {
-          "Hello from the block"
-        }
-      },
       arguments: {
         deprecate_options: "On favor of arguments",
         block: ->(params = nil) {
