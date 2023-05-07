@@ -2,7 +2,7 @@ class Avo::Resources::Comment < Avo::BaseResource
   self.title = :tiny_name
   self.includes = [:user, :commentable]
   self.search_query = -> do
-    scope.ransack(id_eq: params[:q], body_cont: params[:q], m: "or").result(distinct: false)
+    query.ransack(id_eq: params[:q], body_cont: params[:q], m: "or").result(distinct: false)
   end
   self.record_selector = false
 

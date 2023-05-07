@@ -4,7 +4,7 @@ class Avo::Resources::Sibling < Avo::BaseResource
   self.includes = []
   self.model_class = ::Sibling
   self.search_query = -> do
-    scope.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
+    query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
   end
 
   def fields

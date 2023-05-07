@@ -5,10 +5,10 @@ class Avo::Resources::User < Avo::BaseResource
   }
   self.translation_key = "avo.resource_translations.user"
   self.search_query = -> do
-    scope.order(created_at: :desc).ransack(id_eq: params[:q], first_name_cont: params[:q], last_name_cont: params[:q], m: "or").result(distinct: false)
+    query.order(created_at: :desc).ransack(id_eq: params[:q], first_name_cont: params[:q], last_name_cont: params[:q], m: "or").result(distinct: false)
   end
   self.resolve_index_query = -> do
-    model_class.order(last_name: :asc)
+    query.order(last_name: :asc)
   end
   self.find_record_method = -> {
     # When using friendly_id, we need to check if the id is a slug or an id.
@@ -16,10 +16,10 @@ class Avo::Resources::User < Avo::BaseResource
     # If it's an id, we need to use the find method.
     # If the id is an array, we need to use the where method in order to return a collection.
     if id.is_a?(Array)
-      return id.first.to_i == 0 ? model_class.where(slug: id) : model_class.where(id: id)
+      return id.first.to_i == 0 ? query.where(slug: id) : query.where(id: id)
     end
 
-    (id.to_i == 0) ? model_class.find_by_slug(id) : model_class.find(id)
+    id.to_i == 0 ? query.find_by_slug(id) : query.find(id)
   }
   self.includes = [:posts, :post]
   self.devise_password_optional = true

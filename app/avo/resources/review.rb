@@ -3,7 +3,7 @@ class Avo::Resources::Review < Avo::BaseResource
   self.includes = [:user, :reviewable]
   self.description = "Demo resource to illustrate searchable belongs_to associations. Visit a team and create a review for it."
   # self.search_query = -> do
-  #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
+  #   query.ransack(id_eq: params[:q], m: "or").result(distinct: false)
   # end
 
   def fields

@@ -3,10 +3,10 @@ class Avo::Resources::TeamUser < Avo::BaseResource
   self.includes = []
   self.model_class = 'User'
   self.resolve_find_scope = -> do
-    model_class.friendly
+    query.friendly
   end
   # self.search_query = -> do
-  #   scope.ransack(id_eq: params[:q], m: "or").result(distinct: false)
+  #   query.ransack(id_eq: params[:q], m: "or").result(distinct: false)
   # end
 
   def fields
