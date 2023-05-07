@@ -9,22 +9,24 @@ class Avo::Resources::Comment < Avo::BaseResource
   self.after_create_path = :index
   self.after_update_path = :index
 
-  field :id, as: :id
-  field :body, as: :textarea, format_using: ->(value) do
-    if view == :show
-      content_tag(:div, style: "white-space: pre-line") { value }
-    else
-      value
+  def fields
+    field :id, as: :id
+    field :body, as: :textarea, format_using: -> do
+      if view == :show
+        content_tag(:div, style: "white-space: pre-line") { value }
+      else
+        value
+      end
     end
-  end
-  field :tiny_name, as: :text, only_on: :index, as_description: true
-  field :posted_at,
+    field :tiny_name, as: :text, only_on: :index, as_description: true
+    field :posted_at,
     as: :date_time,
     picker_format: "Y-m-d H:i:S",
     format: "cccc, d LLLL yyyy, HH:mm ZZZZ" # Wednesday, 10 February 1988, 16:00 GMT
 
-  field :user, as: :belongs_to
-  field :commentable, as: :belongs_to, polymorphic_as: :commentable, types: [::Post, ::Project]
+    field :user, as: :belongs_to
+    field :commentable, as: :belongs_to, polymorphic_as: :commentable, types: [::Post, ::Project]
+  end
 
   filter Avo::Filters::CommentBodyFilter
 end

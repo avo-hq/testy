@@ -71,16 +71,10 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
-  def upload_attachments?
-    true
-  end
-
-  def download_attachments?
-    true
-  end
-
-  def delete_attachments?
-    true
+  [:upload, :download, :delete].each do |action|
+    define_method "#{action}_cv?" do
+      true
+    end
   end
 
   def view_team_memberships?

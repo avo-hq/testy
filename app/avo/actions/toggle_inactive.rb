@@ -1,9 +1,10 @@
 class Avo::Actions::ToggleInactive < Avo::BaseAction
   self.name = "Toggle inactive"
 
-  field :notify_user, as: :boolean, default: true
-  field :message, as: :text, default: "Your account has been marked as inactive."
-  field :user_id,
+  def fields
+    field :notify_user, as: :boolean, default: true
+    field :message, as: :text, default: "Your account has been marked as inactive."
+    field :user_id,
     as: :tags,
     mode: :select,
     close_on_select: true,
@@ -17,6 +18,7 @@ class Avo::Actions::ToggleInactive < Avo::BaseAction
         }
       end
     end
+  end
 
   def handle(**args)
     records, fields, _ = args.values_at(:records, :fields, :current_user, :resource)
