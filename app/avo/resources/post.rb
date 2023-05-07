@@ -40,7 +40,6 @@ class Avo::Resources::Post < Avo::BaseResource
       extract_excerpt record.body
     end
 
-
     field :is_featured, as: :boolean, visible: -> do
       Avo::Current.context[:user].is_admin?
     end
