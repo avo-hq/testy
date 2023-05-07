@@ -12,8 +12,8 @@ class Avo::Actions::ReleaseFish < Avo::BaseAction
   end
 
   def handle(records:, fields:, **)
-    records.each do |model|
-      model.release
+    records.each do |record|
+      record.release
     end
 
     # Try and find that user

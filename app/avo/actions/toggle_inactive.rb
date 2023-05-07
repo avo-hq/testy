@@ -23,14 +23,14 @@ class Avo::Actions::ToggleInactive < Avo::BaseAction
   def handle(**args)
     records, fields, _ = args.values_at(:records, :fields, :current_user, :resource)
 
-    records.each do |model|
-      if model.active
-        model.update active: false
+    records.each do |record|
+      if record.active
+        record.update active: false
       else
-        model.update active: true
+        record.update active: true
       end
 
-      model.notify fields[:message] if fields[:notify_user]
+      record.notify fields[:message] if fields[:notify_user]
     end
 
     silent
