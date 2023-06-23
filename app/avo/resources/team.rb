@@ -1,9 +1,23 @@
 class Avo::Resources::Team < Avo::BaseResource
   self.title = :name
   self.includes = [:admin, :team_members]
-  self.search_query = -> do
-    query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  self.search = {
+    query: -> {
+      query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
+    }
+  }
+  self.grid_view = {
+    card: -> do
+      {
+        cover_url:
+          if record.url.present?
+            "//logo.clearbit.com/#{URI.parse(record.url).host}?size=180"
+          end,
+        title: record.name,
+        body: record.url
+      }
+    end
+  }
 
   def fields
     field :preview, as: :preview
@@ -67,18 +81,12 @@ class Avo::Resources::Team < Avo::BaseResource
     end
   end
 
-  grid do
-    cover :logo, as: :external_image, link_to_resource: true do
-      if record.url.present?
-        "//logo.clearbit.com/#{URI.parse(record.url).host}?size=180"
-      end
-    end
-    title :name, as: :text, link_to_resource: true
-    body :url, as: :text
+  def filters
+    filter Avo::Filters::MembersFilter
+    filter Avo::Filters::NameFilter
   end
 
-  filter Avo::Filters::MembersFilter
-  filter Avo::Filters::NameFilter
-
-  action Avo::Actions::DummyAction
+  def actions
+    action Avo::Actions::DummyAction
+  end
 end

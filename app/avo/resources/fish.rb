@@ -1,9 +1,12 @@
 class Avo::Resources::Fish < Avo::BaseResource
   self.title = :name
   self.includes = []
-  self.search_query = -> do
-    query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  self.search = {
+    query: -> {
+      query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
+    }
+  }
+
   self.extra_params = [:fish_type, :something_else, properties: [], information: [:name, :history], reviews_attributes: [:body, :user_id]]
 
   self.show_controls = -> do
@@ -50,6 +53,14 @@ class Avo::Resources::Fish < Avo::BaseResource
     link_to "Information about #{record.name}", "https://en.wikipedia.org/wiki/#{record.name}",
       icon: "heroicons/outline/information-circle", target: :_blank, style: :icon
   end
+
+  self.grid_view = {
+    card: -> do
+      {
+        title: record.name
+      }
+    end
+  }
 
   def fields
     field :id, as: :id
@@ -119,16 +130,16 @@ class Avo::Resources::Fish < Avo::BaseResource
     end
   end
 
-  grid do
-    title :name, as: :text, required: true, link_to_resource: true
+  def filters
+    filter Avo::Filters::NameFilter, arguments: {
+      case_insensitive: true
+    }
   end
 
-  filter Avo::Filters::NameFilter, arguments: {
-    case_insensitive: true
-  }
-
-  action Avo::Actions::DummyAction, arguments: {
-    special_message: true
-  }
-  action Avo::Actions::ReleaseFish
+  def actions
+    action Avo::Actions::DummyAction, arguments: {
+      special_message: true
+    }
+    action Avo::Actions::ReleaseFish
+  end
 end

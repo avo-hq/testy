@@ -5,13 +5,15 @@ class Avo::Resources::PhotoComment < Avo::BaseResource
   self.includes = [:user]
   self.model_class = ::Comment
   self.authorization_policy = PhotoCommentPolicy
-  self.search_query = -> do
-    if params[:via_association] == "has_many"
-      query.ransack(id_eq: params[:q], m: "or").result(distinct: false).joins(:photo_attachment)
-    else
-      query.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-    end
-  end
+  self.search = {
+    query: -> {
+      if params[:via_association] == "has_many"
+        query.ransack(id_eq: params[:q], m: "or").result(distinct: false).joins(:photo_attachment)
+      else
+        query.ransack(id_eq: params[:q], m: "or").result(distinct: false)
+      end
+    }
+  }
 
   def fields
     field :id, as: :id
@@ -30,7 +32,11 @@ class Avo::Resources::PhotoComment < Avo::BaseResource
     field :commentable_id, as: :hidden, default: -> { Avo::Current.params[:via_record_id] }
   end
 
-  action Avo::Actions::DeleteComment
+  def actions
+    action Avo::Actions::DeleteComment
+  end
 
-  filter Avo::Filters::PhotoFilter
+  def filters
+    filter Avo::Filters::PhotoFilter
+  end
 end

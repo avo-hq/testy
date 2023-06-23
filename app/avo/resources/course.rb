@@ -1,9 +1,11 @@
 class Avo::Resources::Course < Avo::BaseResource
   self.title = :name
   self.includes = []
-  self.search_query = -> do
-    query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  self.search = {
+    query: -> {
+      query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
+    }
+  }
   self.keep_filters_panel_open = true
   self.stimulus_controllers = "course-resource toggle-fields"
 
@@ -80,8 +82,10 @@ class Avo::Resources::Course < Avo::BaseResource
       display_value: false
     field :links, as: :has_many, searchable: true, placeholder: "Click to choose a link",
       discreet_pagination: true, nested_creation: true
-    end
+  end
 
-  filter Avo::Filters::CourseCountryFilter
-  filter Avo::Filters::CourseCityFilter
+  def filters
+    filter Avo::Filters::CourseCountryFilter
+    filter Avo::Filters::CourseCityFilter
+  end
 end

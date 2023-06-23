@@ -3,6 +3,30 @@ class Avo::Resources::Product < Avo::BaseResource
   self.includes = []
   self.default_view_type = :grid
 
+  self.grid_view = {
+    card: -> do
+      {
+        cover_url:
+          if record.image.attached?
+            main_app.url_for(record.image.url)
+          end,
+        title: record.title,
+        body: simple_format(record.description)
+      }
+    end,
+    html: -> do
+      {
+        cover: {
+          index: {
+            wrapper: {
+              style: "background: pink;"
+            }
+          }
+        }
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :title, as: :text, html: {
@@ -22,19 +46,5 @@ class Avo::Resources::Product < Avo::BaseResource
     field :image, as: :file, is_image: true
     field :price, as: :number
     field :category, as: :select, enum: ::Product.categories
-  end
-
-  grid do
-    cover :image, as: :file, is_image: true, link_to_resource: true, html: {
-      index: {
-        wrapper: {
-          style: "background: pink;"
-        }
-      }
-    }
-    title :title, as: :text
-    body :description, as: :textarea, format_using: -> {
-      simple_format value
-    }
   end
 end

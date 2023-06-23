@@ -4,12 +4,23 @@ class Avo::Resources::User < Avo::BaseResource
     "Users of the app. view: #{view}"
   }
   self.translation_key = "avo.resource_translations.user"
-  self.search_query = -> do
-    query.order(created_at: :desc).ransack(id_eq: params[:q], first_name_cont: params[:q], last_name_cont: params[:q], m: "or").result(distinct: false)
-  end
-  self.resolve_index_query = -> do
+  self.search = {
+    query: -> {
+      query.order(created_at: :desc).ransack(id_eq: params[:q], first_name_cont: params[:q], last_name_cont: params[:q], m: "or").result(distinct: false)
+    }
+  }
+  self.grid_view = {
+    card: -> do
+      {
+        cover_url: record.avatar,
+        title: record.name,
+        body: record.url
+      }
+    end
+  }
+  self.index_query = -> {
     query.order(last_name: :asc)
-  end
+  }
   self.find_record_method = -> {
     # When using friendly_id, we need to check if the id is a slug or an id.
     # If it's a slug, we need to use the find_by_slug method.
@@ -129,19 +140,24 @@ class Avo::Resources::User < Avo::BaseResource
     tool Avo::ResourceTools::UserTool
   end
 
-  grid do
-    cover :email, as: :gravatar, link_to_resource: true
-    title :name, as: :text, link_to_resource: true
-    body :url, as: :text
+  def actions
+    action Avo::Actions::ToggleInactive
+    action Avo::Actions::ToggleAdmin
+    action Avo::Actions::DummyAction
+    action Avo::Actions::DownloadFile
   end
 
-  action Avo::Actions::ToggleInactive
-  action Avo::Actions::ToggleAdmin
-  action Avo::Actions::DummyAction
-  action Avo::Actions::DownloadFile
-  scopes Avo::Scopes::OddId, Avo::Scopes::EvenId, Avo::Scopes::Admins, Avo::Scopes::NonAdmins,Avo::Scopes::Active
+  def scopes
+    scope Avo::Scopes::OddId
+    scope Avo::Scopes::EvenId
+    scope Avo::Scopes::Admins
+    scope Avo::Scopes::NonAdmins
+    scope Avo::Scopes::Active
+  end
 
-  filter Avo::Filters::UserNamesFilter
-  filter Avo::Filters::IsAdmin
-  filter Avo::Filters::DummyMultipleSelectFilter
+  def filters
+    filter Avo::Filters::UserNamesFilter
+    filter Avo::Filters::IsAdmin
+    filter Avo::Filters::DummyMultipleSelectFilter
+  end
 end

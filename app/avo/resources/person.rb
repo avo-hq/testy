@@ -4,9 +4,11 @@ class Avo::Resources::Person < Avo::BaseResource
   self.includes = []
 
   self.link_to_child_resource = true
-  # self.search_query = -> do
-  #   query.ransack(id_eq: params[:q], m: "or").result(distinct: false)
-  # end
+  self.search = {
+    query: -> {
+      query.ransack(id_eq: params[:q], m: "or").result(distinct: false)
+    }
+  }
 
   def fields
   field :name, as: :text, link_to_resource: true, sortable: true, stacked: true

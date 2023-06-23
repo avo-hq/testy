@@ -1,9 +1,11 @@
 class Avo::Resources::Comment < Avo::BaseResource
   self.title = :tiny_name
   self.includes = [:user, :commentable]
-  self.search_query = -> do
-    query.ransack(id_eq: params[:q], body_cont: params[:q], m: "or").result(distinct: false)
-  end
+  self.search = {
+    query: -> {
+      query.ransack(id_eq: params[:q], body_cont: params[:q], m: "or").result(distinct: false)
+    }
+  }
   self.record_selector = false
 
   self.after_create_path = :index
@@ -28,5 +30,7 @@ class Avo::Resources::Comment < Avo::BaseResource
     field :commentable, as: :belongs_to, polymorphic_as: :commentable, types: [::Post, ::Project]
   end
 
-  filter Avo::Filters::CommentBodyFilter
+  def filters
+    filter Avo::Filters::CommentBodyFilter
+  end
 end

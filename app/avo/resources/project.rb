@@ -1,10 +1,13 @@
 class Avo::Resources::Project < Avo::BaseResource
   self.title = :name
-  self.search_query = -> do
-    query.ransack(id_eq: params[:q], name_cont: params[:q], country_cont: params[:q], m: "or").result(distinct: false)
-  end
+  self.search = {
+    query: -> {
+      query.ransack(id_eq: params[:q], name_cont: params[:q], country_cont: params[:q], m: "or").result(distinct: false)
+    }
+  }
+
   self.includes = :users
-  self.unscoped_queries_on_index = true
+  self.index_query = -> { query.unscoped }
 
   def fields
     field :id, as: :id, link_to_resource: true
@@ -43,10 +46,14 @@ class Avo::Resources::Project < Avo::BaseResource
     field :reviews, as: :has_many
   end
 
-  action Avo::Actions::ExportCsv
+  def actions
+    action Avo::Actions::ExportCsv
+  end
 
-  # filter PeopleFilter
-  # filter People2Filter
-  # filter FeaturedFilter
-  # filter MembersFilter
+  def filters
+    # filter Avo::Filters::PeopleFilter
+    # filter Avo::Filters::People2Filter
+    # filter Avo::Filters::FeaturedFilter
+    # filter Avo::Filters::MembersFilter
+  end
 end

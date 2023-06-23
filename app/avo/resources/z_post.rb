@@ -1,9 +1,24 @@
 class Avo::Resources::ZPost < Avo::BaseResource
   self.title = :name
-  self.search_query = -> do
-    query.ransack(id_eq: params[:q], name_cont: params[:q], body_cont: params[:q], m: "or").result(distinct: false)
-  end
-  self.search_query_help = "- search by id, name or body"
+  self.search = {
+    query: -> {
+      query.ransack(id_eq: params[:q], name_cont: params[:q], body_cont: params[:q], m: "or").result(distinct: false)
+    },
+    help: "- search by id, name or body"
+  }
+
+  self.grid_view = {
+    card: -> do
+      {
+        cover_url:
+          if record.cover_photo.attached?
+            main_app.url_for(record.cover_photo.url)
+          end,
+        title: record.name,
+        body: ActionView::Base.full_sanitizer.sanitize(record.body).truncate(130)
+      }
+    end
+  }
   self.includes = [:user]
   self.default_view_type = :grid
   self.model_class = "Post"
@@ -52,19 +67,13 @@ class Avo::Resources::ZPost < Avo::BaseResource
     field :comments, as: :has_many, use_resource: Avo::Resources::PhotoComment
   end
 
-  grid do
-    cover :cover_photo, as: :file, is_image: true, link_to_resource: true
-    title :name, as: :text, required: true, link_to_resource: true
-    body :excerpt, as: :text do
-      ActionView::Base.full_sanitizer.sanitize(record.body).truncate 130
-    rescue
-      ""
-    end
+  def filters
+    filter Avo::Filters::FeaturedFilter
+    filter Avo::Filters::PublishedFilter
+    filter Avo::Filters::PostStatusFilter
   end
 
-  filter Avo::Filters::FeaturedFilter
-  filter Avo::Filters::PublishedFilter
-  filter Avo::Filters::PostStatusFilter
-
-  action Avo::Actions::TogglePublished
+  def actions
+    action Avo::Actions::TogglePublished
+  end
 end
