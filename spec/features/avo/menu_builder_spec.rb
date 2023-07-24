@@ -58,8 +58,8 @@ RSpec.feature "MenuBuilders", type: :feature do
   before do
     allow_message_expectations_on_nil
 
-    allow(Avo::App.license).to receive(:lacks_with_trial) { :resource_ordering }.and_return(false)
-    allow(Avo::App.license).to receive(:lacks_with_trial) { :custom_tools }.and_return(false)
+    allow(Avo.license).to receive(:lacks_with_trial) { :resource_ordering }.and_return(false)
+    allow(Avo.license).to receive(:lacks_with_trial) { :custom_tools }.and_return(false)
 
     # Stub the App
     double = Class.new do
@@ -69,9 +69,9 @@ RSpec.feature "MenuBuilders", type: :feature do
 
       def tools_for_navigation = []
     end.new
-    allow(Avo::App).to receive(:dashboards).and_return(double)
-    allow(Avo::App).to receive(:resources).and_return(double)
-    allow(Avo::App).to receive(:tools).and_return(double)
+    allow(Avo).to receive(:dashboards).and_return(double)
+    allow(Avo).to receive(:resources).and_return(double)
+    allow(Avo).to receive(:tools).and_return(double)
   end
 
   it "builds the menu" do

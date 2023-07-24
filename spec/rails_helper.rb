@@ -30,7 +30,7 @@ ENV["TZ"] ||= "UTC"
 #
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
-Avo::App.boot
+Avo.boot
 
 require "support/download_helpers"
 require "support/request_helpers"
