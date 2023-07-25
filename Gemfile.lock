@@ -63,6 +63,7 @@ PATH
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
+      activesupport (>= 6.1)
       addressable
       docile
       dry-initializer
