@@ -17,6 +17,16 @@ PATH
       zeitwerk
 
 PATH
+  remote: ../avo-menu
+  specs:
+    avo-menu (0.1.10)
+      avo
+      docile
+      dry-initializer
+      rails (>= 6.1.0)
+      zeitwerk
+
+PATH
   remote: ../avo-pro
   specs:
     avo-pro (0.1.53)
@@ -37,16 +47,6 @@ PATH
       rails (>= 6.1.0)
       ransack
       view_component
-      zeitwerk
-
-PATH
-  remote: ../avo_menu
-  specs:
-    avo_menu (0.1.10)
-      avo
-      docile
-      dry-initializer
-      rails (>= 6.1.0)
       zeitwerk
 
 PATH
@@ -538,9 +538,9 @@ DEPENDENCIES
   avo!
   avo-advanced!
   avo-dashboards!
+  avo-menu!
   avo-pro!
   avo_filters!
-  avo_menu!
   avo_nested_resources!
   awesome_print
   bootsnap

@@ -83,7 +83,7 @@ Rails.application.configure do
   ]
   engines = [
     "Avo",
-    "AvoMenu",
+    "Avo::Menu",
     "AvoFilters",
     "Avo::Dashboards",
     "Avo::Pro",

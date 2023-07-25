@@ -53,7 +53,7 @@ RSpec.feature "MenuBuilders", type: :feature do
     }
   }
 
-  subject { AvoMenu::Builder.parse_menu(&block) }
+  subject { Avo::Menu::Builder.parse_menu(&block) }
 
   before do
     allow_message_expectations_on_nil
@@ -76,11 +76,11 @@ RSpec.feature "MenuBuilders", type: :feature do
 
   it "builds the menu" do
     expect(subject.items.count).to eq 5
-    expect(subject.items.map(&:class)).to eq [AvoMenu::Section, AvoMenu::Section, AvoMenu::Section, AvoMenu::Group, AvoMenu::Link]
+    expect(subject.items.map(&:class)).to eq [Avo::Menu::Section, Avo::Menu::Section, Avo::Menu::Section, Avo::Menu::Group, Avo::Menu::Link]
 
     # First section
     expect(subject.items.first.items.count).to eq 3
-    expect(subject.items.first.items.map(&:class)).to eq [AvoMenu::Dashboard, AvoMenu::Dashboard, AvoMenu::Group]
+    expect(subject.items.first.items.map(&:class)).to eq [Avo::Menu::Dashboard, Avo::Menu::Dashboard, Avo::Menu::Group]
     expect(subject.items.first.name).to eq "Dashboards"
     expect(subject.items.first.icon).to eq "dashboards"
     expect(subject.items.first.items.first.name).to eq ""
