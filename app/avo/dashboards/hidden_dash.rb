@@ -1,4 +1,4 @@
-class Avo::Dashboards::HiddenDash < AvoDashboards::BaseDashboard
+class Avo::Dashboards::HiddenDash < Avo::Dashboards::BaseDashboard
   self.id = "hidden_dash"
   self.name = "Hidden dash"
   self.description = "Hidden dash description"

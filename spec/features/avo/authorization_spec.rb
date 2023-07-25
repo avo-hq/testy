@@ -48,7 +48,7 @@ RSpec.feature "Authorizations", type: :feature do
         end
       end
       # rubocop:enable Lint/ConstantDefinitionInBlock
-      allow_any_instance_of(AvoPro::Authorization::Clients::PunditClient).to receive(:scope_for_policy_class).and_return StubbedScope
+      allow_any_instance_of(Avo::Pro::Authorization::Clients::PunditClient).to receive(:scope_for_policy_class).and_return StubbedScope
 
       visit "/admin/resources/teams/#{team.id}/team_members?turbo_frame=has_many_field_show_team_members"
 

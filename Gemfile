@@ -5,9 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec path: './../avo'
 # Pluggy is Avo's the test plugin and we need to require it in this app if we want to have it available
 gem "pluggy", path: "./../avo/pluggy"
-gemspec path: './../avo_advanced'
-gemspec path: './../avo_pro'
-gemspec path: './../avo_dashboards'
+gemspec path: './../avo-advanced'
+gemspec path: './../avo-pro'
+gemspec path: './../avo-dashboards'
 gemspec path: './../avo_filters'
 gemspec path: './../avo_menu'
 gemspec path: './../avo_nested_resources'

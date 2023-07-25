@@ -1,4 +1,4 @@
-class Avo::Dashboards::Sales < AvoDashboards::BaseDashboard
+class Avo::Dashboards::Sales < Avo::Dashboards::BaseDashboard
   self.id = "sales"
   self.name = "Sales"
   self.description = "Tiny dashboard description"

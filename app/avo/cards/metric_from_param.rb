@@ -1,4 +1,4 @@
-class Avo::Cards::MetricFromParam < AvoDashboards::MetricCard
+class Avo::Cards::MetricFromParam < Avo::Dashboards::MetricCard
   self.id = "metric_from_param"
   self.label = "Metric from param"
 
