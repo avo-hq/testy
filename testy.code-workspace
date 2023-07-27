@@ -1,30 +1,39 @@
 {
 	"folders": [
     {
+      "name": "avo",
       "path": "../avo"
     },
     {
+      "name": "avo-pro",
       "path": "../avo-pro"
     },
     {
+      "name": "avo-advanced",
       "path": "../avo-advanced"
     },
     {
+      "name": "avo-dynamic_filters",
+      "path": "../avo-dynamic_filters"
+    },
+    {
+      "name": "avo-dashboards",
       "path": "../avo-dashboards"
     },
     {
-      "path": "../avo_filters"
-    },
-    {
+      "name": "avo-menu",
       "path": "../avo-menu"
     },
     {
+      "name": "avo_nested_resources",
       "path": "../avo_nested_resources"
     },
     {
+      "name": "testy",
       "path": "."
     },
     {
+      "name": "support",
       "path": "../support"
     }
   ],
