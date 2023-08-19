@@ -3,7 +3,7 @@ class Avo::Actions::DummyAction < Avo::BaseAction
   self.standalone = true
   self.visible = -> do
     if resource.is_a? Avo::Resources::User
-      view == :index
+      view.index?
     else
       true
     end

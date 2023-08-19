@@ -18,7 +18,7 @@ class Avo::Resources::PhotoComment < Avo::BaseResource
   def fields
     field :id, as: :id
     field :body, as: :textarea, format_using: -> do
-      if view == :show
+      if view.show?
         content_tag(:div, style: "white-space: pre-line") { value }
       else
         value

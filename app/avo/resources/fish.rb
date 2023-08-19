@@ -64,8 +64,8 @@ class Avo::Resources::Fish < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :id, as: :number, only_on: :forms, disabled: -> { view != :new }
-    field :name, as: :text, required: -> { view == :new }, help: "help text"
+    field :id, as: :number, only_on: :forms, disabled: -> { !view.new? }
+    field :name, as: :text, required: -> { view.new? }, help: "help text"
     field :user, as: :belongs_to
     field :type, as: :text, hide_on: :forms
     field :reviews, as: :has_many
