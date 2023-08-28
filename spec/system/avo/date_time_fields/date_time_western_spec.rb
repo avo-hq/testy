@@ -9,7 +9,7 @@ RSpec.describe "Date field on western zone", type: :system do
   before do
     Avo::Resources::Comment.with_temporary_items do
       field :body, as: :textarea, format_using: -> do
-        if view == :show
+        if view.show?
           content_tag(:div, style: "white-space: pre-line") { value }
         else
           value
