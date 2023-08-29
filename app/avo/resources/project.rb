@@ -10,7 +10,7 @@ class Avo::Resources::Project < Avo::BaseResource
   self.index_query = -> { query.unscoped }
 
   def fields
-    field :id, as: :id, link_to_resource: true
+    field :id, as: :id, link_to_record: true
     field :name, required: true, as_label: true, sortable: true
     field :progress, as: :progress_bar, value_suffix: "%", display_value: true
     field :status,
