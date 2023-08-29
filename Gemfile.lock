@@ -1,15 +1,16 @@
 PATH
   remote: ../avo-advanced
   specs:
-    avo-advanced (0.1.53)
-      avo
+    avo-advanced (0.1.63)
+      avo-dynamic_filters (>= 0.5.14)
+      avo-pro (>= 0.1.64)
       rails (>= 6.1.0)
       zeitwerk
 
 PATH
   remote: ../avo-dashboards
   specs:
-    avo-dashboards (0.1.5)
+    avo-dashboards (0.1.10)
       avo
       rails (>= 6.1.0)
       turbo-rails
@@ -17,9 +18,19 @@ PATH
       zeitwerk
 
 PATH
+  remote: ../avo-dynamic_filters
+  specs:
+    avo-dynamic_filters (0.5.14)
+      avo
+      rails (>= 6.1.0)
+      ransack
+      view_component
+      zeitwerk
+
+PATH
   remote: ../avo-menu
   specs:
-    avo-menu (0.1.10)
+    avo-menu (0.1.15)
       avo
       docile
       dry-initializer
@@ -29,8 +40,10 @@ PATH
 PATH
   remote: ../avo-pro
   specs:
-    avo-pro (0.1.53)
-      avo
+    avo-pro (0.1.64)
+      avo (>= 3.0.1.beta8)
+      avo-dashboards (>= 0.1.10)
+      avo-menu (>= 0.1.15)
       rails (>= 6.1.0)
       zeitwerk
 
@@ -38,16 +51,6 @@ PATH
   remote: ../avo/pluggy
   specs:
     pluggy (0.0.1)
-
-PATH
-  remote: ../avo_filters
-  specs:
-    avo_filters (0.5.8)
-      avo
-      rails (>= 6.1.0)
-      ransack
-      view_component
-      zeitwerk
 
 PATH
   remote: ../avo_nested_resources
@@ -59,7 +62,7 @@ PATH
 PATH
   remote: ../avo
   specs:
-    avo (3.0.0.pre13)
+    avo (3.0.1.beta8)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -538,9 +541,9 @@ DEPENDENCIES
   avo!
   avo-advanced!
   avo-dashboards!
+  avo-dynamic_filters!
   avo-menu!
   avo-pro!
-  avo_filters!
   avo_nested_resources!
   awesome_print
   bootsnap
