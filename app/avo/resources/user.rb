@@ -36,8 +36,8 @@ class Avo::Resources::User < Avo::BaseResource
   self.devise_password_optional = true
 
   def fields
-    field :id, as: :id, link_to_resource: true
-    field :email, as: :gravatar, link_to_resource: true, as_avatar: :circle, only_on: :index
+    field :id, as: :id, link_to_record: true
+    field :email, as: :gravatar, link_to_record: true, as_avatar: :circle, only_on: :index
     field :user_information, as: :heading
     field :first_name, as: :text, placeholder: "John", stacked: true
     field :last_name, as: :text, placeholder: "Doe", filterable: true
@@ -74,7 +74,7 @@ class Avo::Resources::User < Avo::BaseResource
     field :team_id, as: :hidden, default: 0 # For testing purposes
 
     sidebar do
-      field :email, as: :gravatar, link_to_resource: true, as_avatar: :circle, only_on: :show
+      field :email, as: :gravatar, link_to_record: true, as_avatar: :circle, only_on: :show
       field :heading, as: :heading, label: ""
       field :active, as: :boolean, name: "Is active", only_on: :show
       field :is_admin?, as: :boolean, name: "Is admin", only_on: :index
