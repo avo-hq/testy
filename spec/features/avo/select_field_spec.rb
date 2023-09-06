@@ -6,7 +6,7 @@ RSpec.feature "Select", type: :feature do
 
   before do
     Avo::Resources::Person.with_temporary_items do
-      field :name, as: :text, link_to_resource: true, sortable: true, stacked: true
+      field :name, as: :text, link_to_record: true, sortable: true, stacked: true
       field :type, as: :select, name: "Type", options: {Spouse: "Spouse", Sibling: "Sibling"}, include_blank: true
     end
   end
