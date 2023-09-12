@@ -1,7 +1,7 @@
 PATH
   remote: ../avo-advanced
   specs:
-    avo-advanced (0.1.63)
+    avo-advanced (0.1.64)
       avo-dynamic_filters (>= 0.5.14)
       avo-pro (>= 0.1.64)
       rails (>= 6.1.0)
@@ -10,7 +10,7 @@ PATH
 PATH
   remote: ../avo-dashboards
   specs:
-    avo-dashboards (0.1.10)
+    avo-dashboards (0.1.11)
       avo
       rails (>= 6.1.0)
       turbo-rails
@@ -20,7 +20,7 @@ PATH
 PATH
   remote: ../avo-dynamic_filters
   specs:
-    avo-dynamic_filters (0.5.14)
+    avo-dynamic_filters (0.5.15)
       avo
       rails (>= 6.1.0)
       ransack
@@ -40,7 +40,7 @@ PATH
 PATH
   remote: ../avo-pro
   specs:
-    avo-pro (0.1.64)
+    avo-pro (0.1.65)
       avo (>= 3.0.1.beta8)
       avo-dashboards (>= 0.1.10)
       avo-menu (>= 0.1.15)
