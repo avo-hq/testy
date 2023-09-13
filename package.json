@@ -4,7 +4,8 @@
   "scripts": {
     "build": "yarn build:js && yarn build:css",
     "build:js": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
-    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
+    "avo:tailwindcss": "tailwindcss -i ./app/assets/stylesheets/avo.tailwind.css -o ./app/assets/builds/avo.tailwind.css -c ./config/avo/tailwind.config.js --minify"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
