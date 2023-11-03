@@ -46,10 +46,10 @@ class Course < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["course_id", "created_at", "id", "link", "position", "updated_at"]
+    authorizable_ransackable_attributes
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["links"]
+    authorizable_ransackable_associations
   end
 end

@@ -31,6 +31,10 @@ class Project < ApplicationRecord
   default_scope { order(name: :asc) }
 
   def self.ransackable_attributes(auth_object = nil)
-    ["budget", "country", "created_at", "description", "id", "meta", "name", "progress", "stage", "started_at", "status", "updated_at", "users_required"]
+    authorizable_ransackable_attributes
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    authorizable_ransackable_associations
   end
 end
