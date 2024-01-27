@@ -122,6 +122,9 @@ Avo.configure do |config|
 
     section "Tools", icon: "heroicons/outline/finger-print", collapsable: true, collapsed: true do
       all_tools
+
+      render "avo/sidebar/items/custom_tool", locals: { extra: :partial }
+      render Avo::Sidebar::LinkComponent.new(label: "Custom tool vc", path: avo.custom_tool_path)
     end
 
     group do

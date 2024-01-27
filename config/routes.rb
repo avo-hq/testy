@@ -6,10 +6,6 @@ Rails.application.routes.draw do
   get "hey", to: "home#index"
 
   authenticate :user, ->(user) { user.is_admin? } do
-    scope :admin do
-      get "custom_tool", to: "avo/tools#custom_tool"
-    end
-
     mount Avo::Engine, at: Avo.configuration.root_path
 
     # TODO: support locale based routes
@@ -21,6 +17,8 @@ end
 
 if defined? ::Avo
   Avo::Engine.routes.draw do
+    get "custom_tool", to: "tools#custom_tool", as: :custom_tool
+
     scope :resources do
       get "courses/cities", to: "courses#cities"
       get "users/get_users", to: "users#get_users"

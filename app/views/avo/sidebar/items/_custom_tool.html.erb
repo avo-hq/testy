@@ -1,1 +1,2 @@
-<%= render Avo::Sidebar::LinkComponent.new label: 'Custom tool', path: "#{avo.root_path}custom_tool" %>
+<% locals ||= {} %>
+<%= render Avo::Sidebar::LinkComponent.new label: "Custom tool #{locals[:extra]}", path: avo.custom_tool_path %>
