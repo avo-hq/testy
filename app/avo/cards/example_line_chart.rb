@@ -8,7 +8,7 @@ class Avo::Cards::ExampleLineChart < Avo::Cards::ChartkickCard
   self.legend = false
 
   def query
-    data = 3.times.map do |index|
+    data = 4.times.map do |index|
       {
         name: "Batch #{index}",
         data: 17.times.map { |i| [i, Random.rand(32)] }

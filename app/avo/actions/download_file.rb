@@ -1,7 +1,6 @@
 class Avo::Actions::DownloadFile < Avo::BaseAction
   self.name = "Download file"
   self.standalone = true
-  self.may_download_file = true
 
   def fields
     field :read_from_file, as: :boolean, name: "Read from file", default: false

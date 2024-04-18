@@ -23,7 +23,7 @@ class Avo::Cards::ExampleAreaChart < Avo::Cards::ChartkickCard
   # self.legend_on_left = true
 
   def query
-    data = 3.times.map do |index|
+    data = 4.times.map do |index|
       {
         name: "Batch #{index}",
         data: 17.times.map { |i| [i, Random.rand(32)] }
