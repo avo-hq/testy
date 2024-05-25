@@ -29,6 +29,10 @@
       "path": "../avo_nested_resources"
     },
     {
+      "name": "avo-audits",
+      "path": "../avo-audits"
+    },
+    {
       "name": "testy",
       "path": "."
     },

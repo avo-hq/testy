@@ -5,8 +5,28 @@ Rails.application.routes.draw do
 
   get "hey", to: "home#index"
 
+  # Regular single-tenant mounting technique
   authenticate :user, ->(user) { user.is_admin? } do
     mount Avo::Engine, at: Avo.configuration.root_path
+  end
+
+  # Multi-tenantn mounting technique
+  # config.default_url_options value
+  # scope "/t/:tenant_id" do
+  #   authenticate :user, ->(user) { user.is_admin? } do
+  #     mount Avo::Engine, at: Avo.configuration.root_path
+
+  #     # Mount Avo engines under the right path.
+  #     scope Avo.configuration.root_path do
+  #       instance_exec(&Avo.mount_engines)
+  #     end
+  #   end
+  # end
+
+  # Locale-based routes
+  # scope "(:locale)" do
+  #   mount Avo::Engine, at: Avo.configuration.root_path
+  # end
 
     # TODO: support locale based routes
     scope "(:locale)" do

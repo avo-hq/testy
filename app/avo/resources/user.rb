@@ -140,6 +140,16 @@ class Avo::Resources::User < Avo::BaseResource
     tool Avo::ResourceTools::UserTool
   end
 
+  def cards
+    card Avo::Cards::ExampleAreaChart, cols: 3
+    card Avo::Cards::ExampleMetric, cols: 2
+    card Avo::Cards::ExampleMetric,
+      label: "Active users metric",
+      description: "Count of the active users.",
+      arguments: { active_users: true },
+      visible: -> { !resource.view.form? }
+  end
+
   def actions
     action Avo::Actions::ToggleInactive
     action Avo::Actions::ToggleAdmin
