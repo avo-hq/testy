@@ -19,4 +19,8 @@ class Review < ApplicationRecord
   def tiny_name
     ActionView::Base.full_sanitizer.sanitize(body.to_s).truncate 60
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    authorizable_ransackable_attributes
+  end
 end

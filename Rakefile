@@ -4,3 +4,9 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
+
+# neable this to use Avo from the main repo
+if false
+  Rake::Task["assets:precompile"].enhance(["avo:sym_link"])
+end
+

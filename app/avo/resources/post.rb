@@ -2,7 +2,7 @@ class Avo::Resources::Post < Avo::BaseResource
   self.title = :name
   self.search = {
     query: -> {
-      scope.ransack(id_eq: params[:q], name_cont: params[:q], body_cont: params[:q], m: "or").result(distinct: false)
+      query.ransack(id_eq: params[:q], name_cont: params[:q], body_cont: params[:q], m: "or").result(distinct: false)
     },
     help: "- search by id, name or body"
   }

@@ -10,12 +10,12 @@ gemspec path: './../avo-pro'
 gemspec path: './../avo-dashboards'
 gemspec path: './../avo-dynamic_filters'
 gemspec path: './../avo-menu'
-gemspec path: './../avo_nested_resources'
+# gemspec path: './../avo_nested_resources'
 
-ruby "3.2.0"
+ruby "3.3.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.4", ">= 7.0.4.2"
+gem "rails", "~> 7.1.0"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -54,7 +54,7 @@ gem "redis", "~> 4.0"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+# gem "bootsnap", require: false
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -66,8 +66,8 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   # Debuguger
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem 'ruby-debug-ide', '~> 0.7.3'
-  gem 'debase', '~> 0.2.5.beta2'
+  # gem 'ruby-debug-ide', '~> 0.7.3'
+  # gem 'debase', '~> 0.2.5.beta2'
   # End Debuger
 
   gem "faker", require: false
@@ -126,7 +126,7 @@ group :test do
   gem "simplecov", require: false
   gem "simplecov-cobertura"
   gem "webmock"
-  gem "spring-commands-rspec"
+  # gem "spring-commands-rspec"
   gem "launchy", require: false
 
   gem "test-prof"
@@ -156,7 +156,7 @@ gem 'countries'
 
 gem 'friendly_id', '~> 5.4.0'
 
-gem 'acts-as-taggable-on', '~> 9.0'
+gem 'acts-as-taggable-on', '~> 10.0'
 
 # Dashboards
 gem "chartkick"

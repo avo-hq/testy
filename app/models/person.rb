@@ -19,4 +19,8 @@ class Person < ApplicationRecord
   def link
     "<a href='https://avohq.io'>#{name}</a>"
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    authorizable_ransackable_attributes
+  end
 end

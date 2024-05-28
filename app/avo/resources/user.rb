@@ -36,48 +36,20 @@ class Avo::Resources::User < Avo::BaseResource
   self.devise_password_optional = true
 
   def fields
-    field :id, as: :id, link_to_record: true
-    field :email, as: :gravatar, link_to_record: true, as_avatar: :circle, only_on: :index
-    field :user_information, as: :heading
-    field :first_name, as: :text, placeholder: "John", stacked: true
-    field :last_name, as: :text, placeholder: "Doe", filterable: true
-    field :email, as: :text, name: "User Email", required: true, protocol: :mailto
-    field :active, as: :boolean, name: "Is active", only_on: :index
-    field :cv, as: :file, name: "CV"
-    field :is_admin?, as: :boolean, name: "Is admin", only_on: :index
-    field :roles, as: :boolean_group, options: {admin: "Administrator", manager: "Manager", writer: "Writer"}
-    field :roles, as: :text, hide_on: :all, as_description: true do
-      "This user has the following roles: #{record.roles.select { |key, value| value }.keys.join(", ")}"
-    end
-    field :birthday,
-      as: :date,
-      first_day_of_week: 1,
-      picker_format: "F J Y",
-      format: "cccc, d LLLL yyyy", # Wednesday, 10 February 1988
-      placeholder: "Feb 24th 1955",
-      required: true,
-      only_on: [:index]
-
-    field :is_writer, as: :text,
-      sortable: ->(query, direction) {
-        # Order by something else completely, just to make a test case that clearly and reliably does what we want.
-        query.order(id: direction)
-      },
-      hide_on: :edit do
-        record.posts.to_a.size > 0 ? "yes" : "no"
-      end
-
-    field :password, as: :password, name: "User Password", required: false, except_on: :forms, help: 'You may verify the password strength <a href="http://www.passwordmeter.com/" target="_blank">here</a>.'
-    field :password_confirmation, as: :password, name: "Password confirmation", required: false
-
-    field :dev, as: :heading, label: '<div class="underline uppercase font-bold">DEV</div>', as_html: true
-    field :team_id, as: :hidden, default: 0 # For testing purposes
-
-    sidebar do
-      field :email, as: :gravatar, link_to_record: true, as_avatar: :circle, only_on: :show
-      field :heading, as: :heading, label: ""
-      field :active, as: :boolean, name: "Is active", only_on: :show
+    main_panel do
+      field :id, as: :id, link_to_record: true
+      field :email, as: :gravatar, link_to_record: true, as_avatar: :circle, only_on: :index
+      field :user_information, as: :heading
+      field :first_name, as: :text, placeholder: "John", stacked: true
+      field :last_name, as: :text, placeholder: "Doe", filterable: true
+      field :email, as: :text, name: "User Email", required: true, protocol: :mailto
+      field :active, as: :boolean, name: "Is active", only_on: :index
+      field :cv, as: :file, name: "CV"
       field :is_admin?, as: :boolean, name: "Is admin", only_on: :index
+      field :roles, as: :boolean_group, options: {admin: "Administrator", manager: "Manager", writer: "Writer"}
+      field :roles, as: :text, hide_on: :all, as_description: true do
+        "This user has the following roles: #{record.roles.select { |key, value| value }.keys.join(", ")}"
+      end
       field :birthday,
         as: :date,
         first_day_of_week: 1,
@@ -85,16 +57,46 @@ class Avo::Resources::User < Avo::BaseResource
         format: "cccc, d LLLL yyyy", # Wednesday, 10 February 1988
         placeholder: "Feb 24th 1955",
         required: true,
-        filterable: true,
-        only_on: [:show]
+        only_on: [:index]
+
       field :is_writer, as: :text,
+        sortable: ->(query, direction) {
+          # Order by something else completely, just to make a test case that clearly and reliably does what we want.
+          query.order(id: direction)
+        },
         hide_on: :edit do
           record.posts.to_a.size > 0 ? "yes" : "no"
         end
-      field :outside_link, as: :text, only_on: [:show], format_using: -> { link_to("hey", value, target: "_blank") } do
-        main_app.hey_url
+
+      field :password, as: :password, name: "User Password", required: false, except_on: :forms, help: 'You may verify the password strength <a href="http://www.passwordmeter.com/" target="_blank">here</a>.'
+      field :password_confirmation, as: :password, name: "Password confirmation", required: false
+
+      field :dev, as: :heading, label: '<div class="underline uppercase font-bold">DEV</div>', as_html: true
+      field :team_id, as: :hidden, default: 0 # For testing purposes
+
+      sidebar do
+        field :email, as: :gravatar, link_to_record: true, as_avatar: :circle, only_on: :show
+        field :heading, as: :heading, label: ""
+        field :active, as: :boolean, name: "Is active", only_on: :show
+        field :is_admin?, as: :boolean, name: "Is admin", only_on: :index
+        field :birthday,
+          as: :date,
+          first_day_of_week: 1,
+          picker_format: "F J Y",
+          format: "cccc, d LLLL yyyy", # Wednesday, 10 February 1988
+          placeholder: "Feb 24th 1955",
+          required: true,
+          filterable: true,
+          only_on: [:show]
+        field :is_writer, as: :text,
+          hide_on: :edit do
+            record.posts.to_a.size > 0 ? "yes" : "no"
+          end
+        field :outside_link, as: :text, only_on: [:show], format_using: -> { link_to("hey", value, target: "_blank") } do
+          main_app.hey_url
+        end
+        field :custom_css, as: :code, theme: "dracula", language: "css", help: "This enables you to edit the user's custom styles.", height: "250px"
       end
-      field :custom_css, as: :code, theme: "dracula", language: "css", help: "This enables you to edit the user's custom styles.", height: "250px"
     end
 
     tabs do
